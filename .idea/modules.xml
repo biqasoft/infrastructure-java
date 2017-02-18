@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bpmn/bpmn.iml" filepath="$PROJECT_DIR$/bpmn/bpmn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persistence/customer/customer.iml" filepath="$PROJECT_DIR$/persistence/customer/customer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persistence/datasource/datasource.iml" filepath="$PROJECT_DIR$/persistence/datasource/datasource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/entity/entity.iml" filepath="$PROJECT_DIR$/entity/entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/entity-core/entity-core.iml" filepath="$PROJECT_DIR$/entity-core/entity-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/infrastructure-java.iml" filepath="$PROJECT_DIR$/infrastructure-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice/microservice.iml" filepath="$PROJECT_DIR$/microservice/microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice-i18n/microservice-i18n.iml" filepath="$PROJECT_DIR$/microservice-i18n/microservice-i18n.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persistence/mongodb/mongodb.iml" filepath="$PROJECT_DIR$/persistence/mongodb/mongodb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persistence/mongodb-core/mongodb-core.iml" filepath="$PROJECT_DIR$/persistence/mongodb-core/mongodb-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persistence/object-audit/object-audit.iml" filepath="$PROJECT_DIR$/persistence/object-audit/object-audit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persistence/persistence.iml" filepath="$PROJECT_DIR$/persistence/persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persistence/persistence-biqa-base/persistence-biqa-base.iml" filepath="$PROJECT_DIR$/persistence/persistence-biqa-base/persistence-biqa-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/storage/storage.iml" filepath="$PROJECT_DIR$/storage/storage.iml" />
+    </modules>
+  </component>
+</project>

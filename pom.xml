@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.biqasoft</groupId>
+    <artifactId>infrastructure</artifactId>
+    <version>1.0-RELEASE</version>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>persistence</module>
+        <module>storage</module>
+        <module>microservice</module>
+        <module>microservice-i18n</module>
+        <module>entity</module>
+        <module>entity-core</module>
+        <module>common</module>
+        <module>bpmn</module>
+    </modules>
+
+</project>

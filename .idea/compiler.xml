@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bpmn" />
+        <module name="common" />
+        <module name="customer" />
+        <module name="datasource" />
+        <module name="entity" />
+        <module name="entity-core" />
+        <module name="microservice" />
+        <module name="microservice-i18n" />
+        <module name="mongodb" />
+        <module name="mongodb-core" />
+        <module name="object-audit" />
+        <module name="persistence-biqa-base" />
+        <module name="storage" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bpmn" target="1.8" />
+      <module name="common" target="1.8" />
+      <module name="customer" target="1.8" />
+      <module name="datasource" target="1.8" />
+      <module name="entity" target="1.8" />
+      <module name="entity-core" target="1.8" />
+      <module name="infrastructure-java" target="1.5" />
+      <module name="microservice" target="1.8" />
+      <module name="microservice-i18n" target="1.8" />
+      <module name="mongodb" target="1.8" />
+      <module name="mongodb-core" target="1.8" />
+      <module name="object-audit" target="1.8" />
+      <module name="persistence" target="1.8" />
+      <module name="persistence-biqa-base" target="1.8" />
+      <module name="storage" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

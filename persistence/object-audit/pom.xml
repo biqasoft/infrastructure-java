@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>persistence</artifactId>
+        <groupId>com.biqasoft</groupId>
+        <version>2016.8.4</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>object-audit</artifactId>
+
+    <name>com.biqasoft.object-audit</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.javers</groupId>
+            <artifactId>javers-core</artifactId>
+            <version>${org.javers.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.javers</groupId>
+                    <artifactId>javers-persistence-sql</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.javers</groupId>
+            <artifactId>javers-persistence-mongo</artifactId>
+            <version>${org.javers.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.biqasoft</groupId>
+            <artifactId>entity</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.biqasoft</groupId>
+            <artifactId>entity-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- to have MongoTenantHelper -->
+        <dependency>
+            <groupId>com.biqasoft</groupId>
+            <artifactId>microservice</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.biqasoft</groupId>
+            <artifactId>mongodb</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- to have CurrentUser -->
+        <dependency>
+            <groupId>com.biqasoft</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.biqasoft</groupId>
+            <artifactId>persistence-biqa-base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
