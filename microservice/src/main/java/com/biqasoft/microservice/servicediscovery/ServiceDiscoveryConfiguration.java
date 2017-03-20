@@ -4,22 +4,13 @@
 
 package com.biqasoft.microservice.servicediscovery;
 
-import com.ecwid.consul.v1.ConsulClient;
-import com.ecwid.consul.v1.ConsulRawClient;
 import com.netflix.config.ConfigurationManager;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
 import javax.annotation.PostConstruct;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -32,29 +23,29 @@ import java.util.concurrent.TimeUnit;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class ServiceDiscoveryConfiguration{
 
-    private String serverUrl;
-    private Long timeOut;
-    private int port;
-
-    @Autowired
-    public ServiceDiscoveryConfiguration(@Value("${spring.cloud.consul.port:8500}") Integer port,  @Value("${spring.cloud.consul.host}") String host,
-                                         @Value("${spring.cloud.consul.config.watch.delay:1000}") Long timeOut) {
-        this.serverUrl = host;
-        this.timeOut = timeOut;
-        this.port = port;
-    }
-
-    @Primary
-    @Bean
-    public ConsulClient consulClient(){
-        // fix issues in spring cloud (ConfigWatch#watchConfigKeyValues),
-        // when consul throw com.ecwid.consul.transport TransportException(java.net.SocketTimeoutException: Read timed out)
-        CloseableHttpClient httpClient = HttpClientBuilder.create().setConnectionTimeToLive(timeOut, TimeUnit.MILLISECONDS).build();
-
-        ConsulRawClient consulRawClient = new ConsulRawClient(serverUrl, port, httpClient);
-        ConsulClient client = new ConsulClient(consulRawClient);
-        return client;
-    }
+//    private String serverUrl;
+//    private Long timeOut;
+//    private int port;
+//
+//    @Autowired
+//    public ServiceDiscoveryConfiguration(@Value("${spring.cloud.consul.port:8500}") Integer port,  @Value("${spring.cloud.consul.host}") String host,
+//                                         @Value("${spring.cloud.consul.config.watch.delay:1000}") Long timeOut) {
+//        this.serverUrl = host;
+//        this.timeOut = timeOut;
+//        this.port = port;
+//    }
+//
+//    @Primary
+//    @Bean
+//    public ConsulClient consulClient(){
+//        // fix issues in spring cloud (ConfigWatch#watchConfigKeyValues),
+//        // when consul throw com.ecwid.consul.transport TransportException(java.net.SocketTimeoutException: Read timed out)
+//        CloseableHttpClient httpClient = HttpClientBuilder.create().setConnectionTimeToLive(timeOut, TimeUnit.MILLISECONDS).build();
+//
+//        ConsulRawClient consulRawClient = new ConsulRawClient(serverUrl, port, httpClient);
+//        ConsulClient client = new ConsulClient(consulRawClient);
+//        return client;
+//    }
 
     @PostConstruct
     public void init() {
