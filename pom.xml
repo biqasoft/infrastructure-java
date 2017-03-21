@@ -10,10 +10,6 @@
         <version>2016.8.4</version>
     </parent>
 
-    <properties>
-        <biqa.java-binding>1.0-RELEASE</biqa.java-binding>
-    </properties>
-
     <artifactId>infrastructure</artifactId>
     <version>1.0-RELEASE</version>
 
