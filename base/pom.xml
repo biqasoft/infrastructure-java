@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.biqasoft</groupId>
+    <artifactId>base</artifactId>
+    <version>2016.8.4</version>
+
+    <name>com.biqasoft.base</name>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.2.RELEASE</version>
+    </parent>
+
+    <properties>
+        <biqa.infrastructure-version>1.0-RELEASE</biqa.infrastructure-version>
+        <biqa.binding-version>1.0-RELEASE</biqa.binding-version>
+
+        <!-- Make platform independent -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <org.javers.version>3.0.4</org.javers.version>
+        <com.github.jknack.handlebars.version>4.0.5</com.github.jknack.handlebars.version>
+
+        <com.amazonaws.aws-java-sdk.version>1.11.104</com.amazonaws.aws-java-sdk.version>
+
+        <!--testing -->
+        <testng.version>6.9.10</testng.version>
+
+        <commons-lang3.version>3.4</commons-lang3.version>
+        <springfox.version>2.6.1</springfox.version>
+
+        <!-- Maven plugins -->
+        <maven-compiler-plugin.version>3.5</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+        <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
+
+        <!-- Sardine WEBDAV Client -->
+        <com.github.lookfirst.sardive.version>5.7</com.github.lookfirst.sardive.version>
+
+        <commons-fileupload.version>1.3.1</commons-fileupload.version>
+
+        <google-api-services-drive.version>v2-rev179-1.20.0</google-api-services-drive.version>
+        <google-api-services-oauth2.version>v2-rev108-1.21.0</google-api-services-oauth2.version>
+
+        <!-- TODO: compatible with the latest API versions -->
+        <!--<google-api-common-drive.version>v3-rev18-1.21.0</google-gateway-common-drive.version>-->
+        <!--<dropbox-core-sdk.version>2.0.1</dropbox-core-sdk.version>-->
+        <!--<artifactory.url>http://192.168.127.131:8081</artifactory.url>-->
+
+        <dropbox-core-sdk.version>1.8.2</dropbox-core-sdk.version>
+        <tika-core.version>1.12</tika-core.version>
+        <jaudiotagger.version>2.0.3</jaudiotagger.version>
+        <netty-all.version>4.0.36.Final</netty-all.version>
+        <commons-io.version>2.4</commons-io.version>
+        <microservice-communicator.version>1.2.19-RELEASE</microservice-communicator.version>
+        <spring-cloud-consul-dependencies.version>1.1.3.RELEASE</spring-cloud-consul-dependencies.version>
+    </properties>
+
+    <!-- for consul cloud -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-consul-dependencies</artifactId>
+                <version>${spring-cloud-consul-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>3d0c642b0acb-releases</name>
+            <url>http://192.168.127.131:8081/artifactory/ext-release-local</url>
+        </repository>
+    </distributionManagement>
+
+    <!--<profiles>-->
+    <!--<profile>-->
+    <!--<repositories>-->
+    <!--<repository>-->
+    <!--<snapshots>-->
+    <!--<enabled>false</enabled>-->
+    <!--</snapshots>-->
+    <!--<id>central</id>-->
+    <!--<name>libs-release</name>-->
+    <!--<url>http://192.168.127.131:8081/artifactory/libs-release</url>-->
+    <!--</repository>-->
+    <!--<repository>-->
+    <!--<snapshots/>-->
+    <!--<id>snapshots</id>-->
+    <!--<name>libs-snapshot</name>-->
+    <!--<url>http://192.168.127.131:8081/artifactory/libs-snapshot</url>-->
+    <!--</repository>-->
+    <!--</repositories>-->
+
+    <!--<pluginRepositories>-->
+    <!--<pluginRepository>-->
+    <!--<snapshots>-->
+    <!--<enabled>false</enabled>-->
+    <!--</snapshots>-->
+    <!--<id>central</id>-->
+    <!--<name>plugins-release</name>-->
+    <!--<url>hhttp://192.168.127.131:8081/artifactory/plugins-release</url>-->
+    <!--</pluginRepository>-->
+    <!--<pluginRepository>-->
+    <!--<snapshots/>-->
+    <!--<id>snapshots</id>-->
+    <!--<name>plugins-snapshot</name>-->
+    <!--<url>http://192.168.127.131:8081/artifactory/plugins-snapshot</url>-->
+    <!--</pluginRepository>-->
+    <!--</pluginRepositories>-->
+    <!--<id>artifactory</id>-->
+    <!--<activation>-->
+    <!--<activeByDefault>true</activeByDefault>-->
+    <!--</activation>-->
+    <!--</profile>-->
+    <!--</profiles>-->
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Apache Commons Upload -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-tx</artifactId>-->
+        <!--<version>${org.springframework.version}</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.google.guava</groupId>-->
+            <!--<artifactId>guava</artifactId>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <!-- logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+
+        <!-- needed to bridge to slf4j for projects that use the log4j APIs directly -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-core</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-spring-web</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>jdk9</id>
+            <properties>
+                <jdk.version>1.9</jdk.version>
+            </properties>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${maven-surefire-plugin.version}</version>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <java.version>1.9</java.version>
+                            </systemPropertyVariables>
+                            <argLine>
+                                --add-modules=java.xml.bind 
+                            </argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>jdk8</id>
+            <properties>
+                <jdk.version>1.8</jdk.version>
+            </properties>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${maven-surefire-plugin.version}</version>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+    </profiles>
+
+    <build>
+        <finalName>artifact.biqasoft.com</finalName>
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven-clean-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <failOnError>
+                        false
+                    </failOnError>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <configuration>
+                    <dotGitDirectory>../.git</dotGitDirectory>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <verbose>false</verbose>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+    <repositories>
+    </repositories>
+
+</project>
