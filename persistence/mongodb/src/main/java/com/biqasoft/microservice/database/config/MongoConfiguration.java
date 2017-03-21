@@ -5,7 +5,6 @@
 package com.biqasoft.microservice.database.config;
 
 import com.biqasoft.microservice.database.MongoHelpers;
-import com.biqasoft.microservice.servicediscovery.ServiceDiscoveryConfiguration;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
@@ -18,7 +17,6 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
