@@ -6,6 +6,7 @@
         <artifactId>infrastructure</artifactId>
         <groupId>com.biqasoft</groupId>
         <version>1.0-RELEASE</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -21,5 +22,24 @@
         <module>persistence-biqa-base</module>
     </modules>
 
+    <!--<dependencies>-->
+        <!--<dependency>-->
+            <!--<groupId>com.biqasoft</groupId>-->
+            <!--<artifactId>entity</artifactId>-->
+            <!--<version>${biqa.java-binding}</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.biqasoft</groupId>-->
+            <!--<artifactId>entity-core</artifactId>-->
+            <!--<version>${biqa.java-binding}</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.biqasoft</groupId>-->
+            <!--<artifactId>auth-microservice-communication</artifactId>-->
+            <!--<version>${biqa.java-binding}</version>-->
+        <!--</dependency>-->
+    <!--</dependencies>-->
 
 </project>

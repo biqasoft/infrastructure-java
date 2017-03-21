@@ -29,24 +29,4 @@
         <module>bpmn</module>
     </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.biqasoft</groupId>
-            <artifactId>entity</artifactId>
-            <version>${biqa.java-binding}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.biqasoft</groupId>
-            <artifactId>entity-core</artifactId>
-            <version>${biqa.java-binding}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.biqasoft</groupId>
-            <artifactId>auth-microservice-communication</artifactId>
-            <version>${biqa.java-binding}</version>
-        </dependency>
-    </dependencies>
-
 </project>

@@ -3,11 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>persistence</artifactId>
         <groupId>com.biqasoft</groupId>
+        <artifactId>base</artifactId>
         <version>2016.8.4</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <version>${biqa.infrastructure-version}</version>
 
     <artifactId>mongodb-core</artifactId>
 
@@ -16,7 +17,6 @@
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.data</groupId>

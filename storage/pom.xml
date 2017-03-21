@@ -11,22 +11,29 @@
 
     <parent>
         <groupId>com.biqasoft</groupId>
-        <artifactId>infrastructure</artifactId>
-        <version>1.0-RELEASE</version>
+        <artifactId>base</artifactId>
+        <version>2016.8.4</version>
     </parent>
+    <version>${biqa.infrastructure-version}</version>
 
     <dependencies>
 
         <dependency>
             <groupId>com.biqasoft</groupId>
             <artifactId>common</artifactId>
-            <version>${project.version}</version>
+            <version>${biqa.infrastructure-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.biqasoft</groupId>
+            <artifactId>mongodb-core</artifactId>
+            <version>${biqa.infrastructure-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.biqasoft</groupId>
             <artifactId>object-audit</artifactId>
-            <version>${project.version}</version>
+            <version>${biqa.infrastructure-version}</version>
         </dependency>
 
         <dependency>
@@ -34,27 +41,6 @@
             <artifactId>tika-core</artifactId>
             <version>${tika-core.version}</version>
         </dependency>
-
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.tika</groupId>-->
-            <!--<artifactId>tika-parsers</artifactId>-->
-            <!--<version>${tika-core.version}</version>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>edu.ucar</groupId>-->
-                    <!--<artifactId>grib</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>edu.ucar</groupId>-->
-                    <!--<artifactId>cdm</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.apache.pdfbox</groupId>-->
-                    <!--<artifactId>pdfbox</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>com.amazonaws</groupId>

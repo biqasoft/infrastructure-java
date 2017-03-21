@@ -8,10 +8,11 @@
     <packaging>jar</packaging>
 
     <parent>
-        <artifactId>infrastructure</artifactId>
         <groupId>com.biqasoft</groupId>
-        <version>1.0-RELEASE</version>
+        <artifactId>base</artifactId>
+        <version>2016.8.4</version>
     </parent>
+    <version>${biqa.infrastructure-version}</version>
 
     <dependencies>
 
