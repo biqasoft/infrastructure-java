@@ -52,7 +52,7 @@
         <dependency>
             <groupId>com.biqasoft</groupId>
             <artifactId>entity</artifactId>
-            <version>${project.version}</version>
+            <version>${biqa.binding-version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -60,26 +60,32 @@
         <dependency>
             <groupId>com.biqasoft</groupId>
             <artifactId>microservice</artifactId>
-            <version>${project.version}</version>
+            <version>${biqa.infrastructure-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.biqasoft</groupId>
             <artifactId>mongodb</artifactId>
-            <version>${project.version}</version>
+            <version>${biqa.infrastructure-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.biqasoft</groupId>
+            <artifactId>auth-microservice-communication</artifactId>
+            <version>${biqa.binding-version}</version>
         </dependency>
 
         <!-- to have CurrentUser -->
         <dependency>
             <groupId>com.biqasoft</groupId>
             <artifactId>common</artifactId>
-            <version>${project.version}</version>
+            <version>${biqa.infrastructure-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.biqasoft</groupId>
             <artifactId>persistence-biqa-base</artifactId>
-            <version>${project.version}</version>
+            <version>${biqa.infrastructure-version}</version>
         </dependency>
 
         <dependency>

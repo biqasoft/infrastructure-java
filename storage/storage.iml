@@ -86,8 +86,9 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-actuator:1.5.2.RELEASE" level="project" />
     <orderEntry type="module" module-name="mongodb" />
     <orderEntry type="library" name="Maven: com.biqasoft:entity-core:1.0-RELEASE" level="project" />
-    <orderEntry type="module" module-name="persistence-biqa-base" />
+    <orderEntry type="library" name="Maven: com.biqasoft:auth-microservice-communication:1.0-RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.biqasoft:entity:1.0-RELEASE" level="project" />
+    <orderEntry type="module" module-name="persistence-biqa-base" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:4.3.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tika:tika-core:1.12" level="project" />
