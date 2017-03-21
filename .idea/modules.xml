@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://F:\GithubProjects\biqasoft\infrastructure-java\base\base.iml" filepath="F:\GithubProjects\biqasoft\infrastructure-java\base\base.iml" />
       <module fileurl="file://$PROJECT_DIR$/bpmn/bpmn.iml" filepath="$PROJECT_DIR$/bpmn/bpmn.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/persistence/customer/customer.iml" filepath="$PROJECT_DIR$/persistence/customer/customer.iml" />
       <module fileurl="file://$PROJECT_DIR$/persistence/datasource/datasource.iml" filepath="$PROJECT_DIR$/persistence/datasource/datasource.iml" />
-      <module fileurl="file://$PROJECT_DIR$/entity/entity.iml" filepath="$PROJECT_DIR$/entity/entity.iml" />
-      <module fileurl="file://$PROJECT_DIR$/entity-core/entity-core.iml" filepath="$PROJECT_DIR$/entity-core/entity-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/infrastructure-java.iml" filepath="$PROJECT_DIR$/infrastructure-java.iml" />
       <module fileurl="file://$PROJECT_DIR$/microservice/microservice.iml" filepath="$PROJECT_DIR$/microservice/microservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/microservice-i18n/microservice-i18n.iml" filepath="$PROJECT_DIR$/microservice-i18n/microservice-i18n.iml" />

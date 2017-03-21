@@ -4,21 +4,49 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.biqasoft</groupId>
+    <parent>
+        <groupId>com.biqasoft</groupId>
+        <artifactId>base</artifactId>
+        <version>2016.8.4</version>
+    </parent>
+
+    <properties>
+        <biqa.java-binding>1.0-RELEASE</biqa.java-binding>
+    </properties>
+
     <artifactId>infrastructure</artifactId>
     <version>1.0-RELEASE</version>
 
     <packaging>pom</packaging>
 
     <modules>
+        <module>common</module>
         <module>persistence</module>
+        <module>persistence/object-audit</module>
         <module>storage</module>
         <module>microservice</module>
         <module>microservice-i18n</module>
-        <module>entity</module>
-        <module>entity-core</module>
-        <module>common</module>
         <module>bpmn</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.biqasoft</groupId>
+            <artifactId>entity</artifactId>
+            <version>${biqa.java-binding}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.biqasoft</groupId>
+            <artifactId>entity-core</artifactId>
+            <version>${biqa.java-binding}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.biqasoft</groupId>
+            <artifactId>auth-microservice-communication</artifactId>
+            <version>${biqa.java-binding}</version>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -3,10 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>base</artifactId>
+        <artifactId>infrastructure</artifactId>
         <groupId>com.biqasoft</groupId>
-        <version>2016.8.4</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>1.0-RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -30,19 +29,7 @@
 
         <dependency>
             <groupId>com.biqasoft</groupId>
-            <artifactId>entity-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.biqasoft</groupId>
             <artifactId>common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.biqasoft</groupId>
-            <artifactId>entity</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -117,11 +104,5 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-        <plugins>
-
-        </plugins>
-    </build>
 
 </project>

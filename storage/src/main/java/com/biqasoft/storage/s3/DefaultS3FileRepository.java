@@ -8,7 +8,6 @@ import com.biqasoft.entity.constants.TOKEN_TYPES;
 import com.biqasoft.microservice.database.TenantDatabase;
 import com.biqasoft.storage.DefaultStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;

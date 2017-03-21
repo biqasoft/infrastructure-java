@@ -8,10 +8,9 @@
     <packaging>jar</packaging>
 
     <parent>
+        <artifactId>infrastructure</artifactId>
         <groupId>com.biqasoft</groupId>
-        <artifactId>base</artifactId>
-        <version>2016.8.4</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>1.0-RELEASE</version>
     </parent>
 
     <dependencies>

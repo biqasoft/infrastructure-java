@@ -27,6 +27,7 @@ public class MongoTenantHelper {
 
     // this is connection to user databases with admin role and credentials
     // only for internal operations
+    // TODO: limit connection number
     private ConcurrentHashMap<String, MongoTemplate> allDomainsMap = new ConcurrentHashMap<>(30);
     private final MongoClient mongoClient;
 
