@@ -19,6 +19,7 @@
         <module>mongodb-core</module>
         <module>customer</module>
         <module>datasource</module>
+        <module>object-audit</module>
         <module>persistence-biqa-base</module>
     </modules>
 
