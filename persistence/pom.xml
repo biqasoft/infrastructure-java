@@ -1,46 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>infrastructure</artifactId>
-        <groupId>com.biqasoft</groupId>
-        <version>1.0-RELEASE</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-
-    <name>com.biqasoft.persistence</name>
-
-    <artifactId>persistence</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>mongodb</module>
-        <module>mongodb-core</module>
-        <module>customer</module>
-        <module>datasource</module>
-        <module>object-audit</module>
-        <module>persistence-biqa-base</module>
-    </modules>
-
-    <!--<dependencies>-->
-        <!--<dependency>-->
-            <!--<groupId>com.biqasoft</groupId>-->
-            <!--<artifactId>entity</artifactId>-->
-            <!--<version>${biqa.java-binding}</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>com.biqasoft</groupId>-->
-            <!--<artifactId>entity-core</artifactId>-->
-            <!--<version>${biqa.java-binding}</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>com.biqasoft</groupId>-->
-            <!--<artifactId>auth-microservice-communication</artifactId>-->
-            <!--<version>${biqa.java-binding}</version>-->
-        <!--</dependency>-->
-    <!--</dependencies>-->
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>base</artifactId>
+    <groupId>com.biqasoft</groupId>
+    <version>2016.8.4</version>
+    <relativePath>../base/pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <name>com.biqasoft.persistence</name>
+  <artifactId>persistence</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+    <module>mongodb</module>
+    <module>mongodb-core</module>
+    <module>customer</module>
+    <module>datasource</module>
+    <module>object-audit</module>
+    <module>persistence-biqa-base</module>
+  </modules>
 </project>
