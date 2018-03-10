@@ -5,7 +5,7 @@
 package com.biqasoft.audit.object.aspect;
 
 import com.biqasoft.audit.object.ObjectsAuditHistoryService;
-import com.biqasoft.entity.constants.SYSTEM_ROLES;
+import com.biqasoft.entity.constants.SystemRoles;
 import com.biqasoft.entity.core.BaseClass;
 import com.biqasoft.entity.core.CurrentUser;
 import org.aspectj.lang.JoinPoint;
@@ -61,7 +61,7 @@ public class AuditObjectSecurityModifyAspect {
                 // if object is marked as secured and user want to delete it
                 // and user is not admin - deny this operation
                 if (classFromDataBase != null && classFromDataBase.isSecured() &&
-                        !currentUser.haveRole(SYSTEM_ROLES.ROLE_ADMIN)) {
+                        !currentUser.haveRole(SystemRoles.ROLE_ADMIN)) {
                     throw new AccessDeniedException("Only user with admin rights can modify or delete secured objects");
                 }
 

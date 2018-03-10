@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.biqasoft</groupId>
     <artifactId>base</artifactId>
-    <version>2017.3.1</version>
+    <version>2018.3.1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <version>${biqa.infrastructure-version}</version>
