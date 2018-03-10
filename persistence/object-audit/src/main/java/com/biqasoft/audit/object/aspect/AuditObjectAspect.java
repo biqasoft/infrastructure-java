@@ -36,6 +36,8 @@ public class AuditObjectAspect {
     @After(" execution(public * *(..)) && @annotation(com.biqasoft.entity.annotations.BiqaAuditObject) ")
     public void biqaAuditObject(JoinPoint joinPoint) {
 
+        // TODO: broken for Mono return type
+
         Object[] params = joinPoint.getArgs();
         for (Object o : params) {
             if (o instanceof BaseClass) {

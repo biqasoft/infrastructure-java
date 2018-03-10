@@ -4,6 +4,7 @@
 
 package com.biqasoft.microservice.configs;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.service.ApiInfo;
@@ -12,8 +13,10 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
+ * incompatible with web flux https://github.com/springfox/springfox/issues/1773
  * Create Swagger for all microservices including internal
  */
+@ConditionalOnClass(name = "javax/servlet/ServletContext")
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {

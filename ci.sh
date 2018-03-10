@@ -16,7 +16,7 @@ find . -name 'pom.xml' | while read line; do
     if [[ $line != "./base/pom.xml" ]]
     then
     xmlstarlet ed --inplace -N p=http://maven.apache.org/POM/4.0.0 -u "/p:project/p:parent/p:version" -v ${PROJECT_VERSION} ${line}
-#    mvn -f ${line} org.codehaus.mojo:versions-maven-plugin:2.3:update-parent -DparentVersion=${PROJECT_VERSION} -DallowSnapshots=true -U
+#    mvn -f ${line} org.codehaus.mojo:versions-maven-plugin:2.3:update-parent -DparentVersion=${PROJECT_VERSION} -DallowSnapshots=true -DgenerateBackupPoms=false -U
         echo "Processing module '$line'"
     fi
 done

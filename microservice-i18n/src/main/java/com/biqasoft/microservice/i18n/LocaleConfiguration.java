@@ -7,7 +7,6 @@ package com.biqasoft.microservice.i18n;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.web.servlet.LocaleResolver;
 
 /**
  * @author Nikita Bakaev, ya@nbakaev.ru
@@ -17,10 +16,10 @@ import org.springframework.web.servlet.LocaleResolver;
 @Configuration
 public class LocaleConfiguration {
 
-    @Bean
-    public LocaleResolver localeResolver() {
-       return new LocaleResolverImpl();
-    }
+//    @Bean
+//    public LocaleResolver localeResolver() {
+//       return new LocaleResolverImpl();
+//    }
 
     /**
      * Put property files in /resources/locale to message source
