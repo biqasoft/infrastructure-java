@@ -4,6 +4,14 @@
     <facet type="Spring" name="Spring">
       <configuration />
     </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <webroots />
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+        </sourceRoots>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -16,9 +24,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="microservice" />
-    <orderEntry type="library" name="Maven: com.biqasoft:microservice-communicator:1.2.19-RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.bitbucket.mstrobel:procyon-reflection:0.5.32" level="project" />
-    <orderEntry type="library" name="Maven: org.bitbucket.mstrobel:procyon-core:0.5.32" level="project" />
+    <orderEntry type="module" module-name="microservice-communicator" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-commons:1.1.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:4.2.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.ecwid.consul:consul-api:1.1.11" level="project" />
@@ -78,9 +84,9 @@
     <orderEntry type="library" name="Maven: org.slf4j:jul-to-slf4j:1.7.24" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-actuator:1.5.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-actuator:1.5.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: com.biqasoft:auth-microservice-communication:1.0-RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: com.biqasoft:entity:1.0-RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: com.biqasoft:entity-core:1.0-RELEASE" level="project" />
+    <orderEntry type="module" module-name="auth-microservice-communication" />
+    <orderEntry type="module" module-name="entity" />
+    <orderEntry type="module" module-name="entity-core" />
     <orderEntry type="library" name="Maven: org.javers:javers-core:3.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.picocontainer:picocontainer:2.15" level="project" />
     <orderEntry type="library" name="Maven: io.github.lukehutch:fast-classpath-scanner:2.0.13" level="project" />

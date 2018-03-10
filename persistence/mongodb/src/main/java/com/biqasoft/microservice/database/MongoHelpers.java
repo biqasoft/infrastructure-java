@@ -9,6 +9,7 @@ import org.springframework.data.mapping.context.MappingContext;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
+import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 import com.biqasoft.microservice.database.converters.BigDecimalToBigDecimalConverter;
@@ -23,7 +24,7 @@ public class MongoHelpers {
     public static MongoTemplate MongoConverter(MongoDbFactory mongoDbFactory) {
         MappingContext mappingContext = new MongoMappingContext();
 
-        MappingMongoConverter converter = new MappingMongoConverter(mongoDbFactory, mappingContext);
+        MappingMongoConverter converter = new MappingMongoConverter(new DefaultDbRefResolver(mongoDbFactory), mappingContext);
 //        converter.setTypeMapper(mapper);
         converter.setCustomConversions(new CustomConversions(
                 Arrays.asList(

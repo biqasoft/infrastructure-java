@@ -4,6 +4,11 @@
     <facet type="Spring" name="Spring">
       <configuration />
     </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <webroots />
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -14,9 +19,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: com.biqasoft:microservice-communicator:1.2.19-RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.bitbucket.mstrobel:procyon-reflection:0.5.32" level="project" />
-    <orderEntry type="library" name="Maven: org.bitbucket.mstrobel:procyon-core:0.5.32" level="project" />
+    <orderEntry type="module" module-name="microservice-communicator" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-commons:1.1.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:4.2.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.ecwid.consul:consul-api:1.1.11" level="project" />

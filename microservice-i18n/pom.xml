@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>com.biqasoft</groupId>
-        <artifactId>base</artifactId>
-        <version>2016.8.4</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <version>${biqa.infrastructure-version}</version>
-
-    <artifactId>microservice-i18n</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.biqasoft</groupId>
-            <artifactId>microservice</artifactId>
-            <version>${biqa.infrastructure-version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.biqasoft</groupId>
-            <artifactId>auth-microservice-communication</artifactId>
-            <version>${biqa.binding-version}</version>
-        </dependency>
-    </dependencies>
-
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>com.biqasoft</groupId>
+    <artifactId>base</artifactId>
+    <version>2017.3.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <version>${biqa.infrastructure-version}</version>
+  <artifactId>microservice-i18n</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>com.biqasoft</groupId>
+      <artifactId>microservice</artifactId>
+      <version>${biqa.infrastructure-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.biqasoft</groupId>
+      <artifactId>auth-microservice-communication</artifactId>
+      <version>${biqa.binding-version}</version>
+    </dependency>
+  </dependencies>
 </project>

@@ -5,7 +5,7 @@
 
     <groupId>com.biqasoft</groupId>
     <artifactId>base</artifactId>
-    <version>2016.8.4</version>
+    <version>2017.3.1</version>
 
     <name>com.biqasoft.base</name>
     <packaging>pom</packaging>
@@ -18,7 +18,7 @@
 
     <properties>
         <biqa.infrastructure-version>1.0-RELEASE</biqa.infrastructure-version>
-        <biqa.binding-version>1.0-RELEASE</biqa.binding-version>
+        <biqa.binding-version>${biqa.infrastructure-version}</biqa.binding-version>
 
         <!-- Make platform independent -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -75,11 +75,19 @@
         </dependencies>
     </dependencyManagement>
 
+    <!--<distributionManagement>-->
+        <!--<repository>-->
+            <!--<id>central</id>-->
+            <!--<name>3d0c642b0acb-releases</name>-->
+            <!--<url>http://192.168.127.131:8081/artifactory/ext-release-local</url>-->
+        <!--</repository>-->
+    <!--</distributionManagement>-->
+
     <distributionManagement>
         <repository>
-            <id>central</id>
-            <name>3d0c642b0acb-releases</name>
-            <url>http://192.168.127.131:8081/artifactory/ext-release-local</url>
+            <id>bintray-biqasoft</id>
+            <name>bintray-biqasoft</name>
+            <url>https://api.bintray.com/maven/biqasoft/maven/${artifactId}/;publish=1</url>
         </repository>
     </distributionManagement>
 
@@ -289,6 +297,33 @@
     </dependencies>
 
     <profiles>
+        <profile>
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-maven</id>
+                    <name>bintray</name>
+                    <url>https://dl.bintray.com/jaycroaker/maven</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-maven</id>
+                    <name>bintray-plugins</name>
+                    <url>https://dl.bintray.com/jaycroaker/maven</url>
+                </pluginRepository>
+            </pluginRepositories>
+            <id>bintray</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
         <profile>
             <id>jdk9</id>
             <properties>

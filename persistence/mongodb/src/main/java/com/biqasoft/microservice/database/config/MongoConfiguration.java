@@ -5,10 +5,7 @@
 package com.biqasoft.microservice.database.config;
 
 import com.biqasoft.microservice.database.MongoHelpers;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
-import com.mongodb.WriteConcern;
+import com.mongodb.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +38,7 @@ public class MongoConfiguration {
      * @param databaseServiceName service name in consul. all common in consul with this name will be interpreted as mongodb cluster nodes
      * @param mainDatabase        name of main authDatabase in mongodb
      * @param username            username of mongodb
-     * @param authDatabase            authDatabase to which user of mongo client will be authenticated. for example admin authDatabase
+     * @param authDatabase        authDatabase to which user of mongo client will be authenticated. for example admin authDatabase
      * @param password            password of mongodb
      */
     @Autowired
@@ -118,9 +115,10 @@ public class MongoConfiguration {
         List<MongoCredential> mongoCredentialsList = new LinkedList<>();
         mongoCredentialsList.add(mongoCredentials);
 
-        mongoClient = new MongoClient(serverAddresses, mongoCredentialsList);
-        mongoClient.setWriteConcern(WriteConcern.MAJORITY);
+        MongoClientOptions.Builder mongoClientOptionsBuilder = MongoClientOptions.builder();
+        mongoClientOptionsBuilder.writeConcern(WriteConcern.MAJORITY);
 
+        mongoClient = new MongoClient(serverAddresses, mongoCredentialsList, mongoClientOptionsBuilder.build());
         return mongoClient;
     }
 

@@ -49,10 +49,7 @@ public class StatsRecorder extends RibbonLoadBalancerClient {
     }
 
     private boolean needCreateStats(MicroserviceRestTemplate microserviceRestTemplate){
-        if (StringUtils.isEmpty(microserviceRestTemplate.getMicroserviceName())){
-            return false;
-        }
-        return true;
+        return !StringUtils.isEmpty(microserviceRestTemplate.getMicroserviceName());
     }
 
     @Autowired

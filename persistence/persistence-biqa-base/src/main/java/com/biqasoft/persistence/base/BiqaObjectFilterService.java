@@ -55,10 +55,14 @@ public class BiqaObjectFilterService {
         return safeUpdate(baseClass, ops, true);
     }
 
-    @SuppressWarnings("unchecked")
     public <T extends BaseClass> T safeUpdate(T baseClass, MongoOperations ops, boolean useOptimisticLock) {
         List<Field> fieldsToUpdate = getAllFields(new LinkedList<>(), baseClass.getClass());
         fieldsToUpdate.forEach(x -> x.setAccessible(true));
+        return safeUpdateWithOptimisticLockSupport(baseClass, ops, useOptimisticLock, fieldsToUpdate);
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T extends BaseClass> T safeUpdateWithOptimisticLockSupport(T baseClass, MongoOperations ops, boolean useOptimisticLock, List<Field> fieldsToUpdate) {
         Update update = new Update();
 
         for (Field field : fieldsToUpdate) {
@@ -90,6 +94,21 @@ public class BiqaObjectFilterService {
         } else {
             return modifiedEntity;
         }
+    }
+
+    /**
+     * update BaseClass class with all fields, only for internal use, where want save entire object with optimistic lock
+     * @param baseClass
+     * @param ops
+     * @param useOptimisticLock
+     * @param <T>
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public <T extends BaseClass> T unsafeUpdate(T baseClass, MongoOperations ops, boolean useOptimisticLock) {
+        List<Field> fieldsToUpdate = getAllFieldsWithBiqaDontOverrideField(new LinkedList<>(), baseClass.getClass());
+        fieldsToUpdate.forEach(x -> x.setAccessible(true));
+        return safeUpdateWithOptimisticLockSupport((T) baseClass, ops, useOptimisticLock, fieldsToUpdate);
     }
 
     /**
@@ -343,6 +362,23 @@ public class BiqaObjectFilterService {
 
         if (type.getSuperclass() != null) {
             fields = getAllFields(fields, type.getSuperclass());
+        }
+        return fields;
+    }
+
+    /**
+     * recursive get fields which should be updated on HTTP PUT
+     * including fields from super class
+     *
+     * @param fields clean List
+     * @param type   class
+     * @return result
+     */
+    private static List<Field> getAllFieldsWithBiqaDontOverrideField(List<Field> fields, Class<?> type) {
+        fields.addAll(Arrays.stream(type.getDeclaredFields()).collect(Collectors.toList()));
+
+        if (type.getSuperclass() != null) {
+            fields = getAllFieldsWithBiqaDontOverrideField(fields, type.getSuperclass());
         }
         return fields;
     }
