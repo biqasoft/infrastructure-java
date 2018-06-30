@@ -4,7 +4,6 @@
 
 package com.biqasoft.microservice.database;
 
-import com.biqasoft.entity.core.useraccount.UserAccount;
 import com.mongodb.MongoClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -76,10 +75,10 @@ public class MongoTenantHelper {
         return mongoClient;
     }
 
-    public static UserAccount createMockedUser(String domain){
-        UserAccount userAccount = new UserAccount();
-        userAccount.setId("SYSTEM_USER");
-        return userAccount;
-    }
+//    public static UserAccount createMockedUser(String domain){
+//        UserAccount userAccount = new UserAccount();
+//        userAccount.setId("SYSTEM_USER");
+//        return userAccount;
+//    }
 
 }

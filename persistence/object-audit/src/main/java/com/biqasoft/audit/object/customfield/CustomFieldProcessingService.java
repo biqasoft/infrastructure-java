@@ -4,10 +4,10 @@
 
 package com.biqasoft.audit.object.customfield;
 
-import com.biqasoft.entity.constants.CUSTOM_FIELD_TYPES;
-import com.biqasoft.entity.core.objects.CustomField;
+import com.biqasoft.auth.CurrentUserContextProvider;
 import com.biqasoft.common.exceptions.ThrowExceptionHelper;
-import com.biqasoft.entity.core.CurrentUser;
+import com.biqasoft.entity.constants.CUSTOM_FIELD_TYPES;
+import com.biqasoft.microservice.common.dto.core.objects.CustomFieldDto;
 import com.biqasoft.microservice.database.MongoTenantHelper;
 import com.mongodb.BasicDBObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,11 @@ import java.util.List;
 @Service
 public class CustomFieldProcessingService {
 
-    private final CurrentUser currentUser;
     private final MongoTenantHelper mongoTenantHelper;
     private final String mainDatabaseName;
 
     @Autowired
-    public CustomFieldProcessingService(CurrentUser currentUser, MongoTenantHelper mongoTenantHelper, @Value("${db.database.main.name}") String databaseName) {
-        this.currentUser = currentUser;
+    public CustomFieldProcessingService(MongoTenantHelper mongoTenantHelper, @Value("${db.database.main.name}") String databaseName) {
         this.mongoTenantHelper = mongoTenantHelper;
         this.mainDatabaseName = databaseName;
     }
@@ -44,27 +42,27 @@ public class CustomFieldProcessingService {
      * @param changedFields
      * @param newCreatedFields
      */
-    public void processFieldsNewOldChanged(List<CustomField> oldFields, List<CustomField> newFields,
-                                           List<CustomField> deletedFields, List<CustomField> changedFields, List<CustomField> newCreatedFields) {
+    public void processFieldsNewOldChanged(List<CustomFieldDto> oldFields, List<CustomFieldDto> newFields,
+                                           List<CustomFieldDto> deletedFields, List<CustomFieldDto> changedFields, List<CustomFieldDto> newCreatedFields) {
 
-        for (CustomField newField : oldFields) {
+        for (CustomFieldDto newField : oldFields) {
             boolean deletedField = true;
-            for (CustomField oldField : newFields) {
+            for (CustomFieldDto oldField : newFields) {
                 if (newField.getFieldId().equals(oldField.getFieldId())) deletedField = false;
             }
             if (deletedField) deletedFields.add(newField);
         }
 
-        for (CustomField newField : newFields) {
+        for (CustomFieldDto newField : newFields) {
             boolean newCreatedField = true;
-            for (CustomField oldField : oldFields) {
+            for (CustomFieldDto oldField : oldFields) {
                 if (newField.getFieldId().equals(oldField.getFieldId())) newCreatedField = false;
             }
             if (newCreatedField) newCreatedFields.add(newField);
         }
 
-        for (CustomField newField : newFields) {
-            for (CustomField oldField : oldFields) {
+        for (CustomFieldDto newField : newFields) {
+            for (CustomFieldDto oldField : oldFields) {
                 if (newField.getFieldId().equals(oldField.getFieldId())) {
                     if (!newField.equals(oldField)) {
                         changedFields.add(newField);
@@ -81,7 +79,7 @@ public class CustomFieldProcessingService {
      * @param newFields fields in new (which we want to update)
      * @param collection DB collection(table) name
      */
-    public void processFields(List<CustomField> oldFields, List<CustomField> newFields, String collection) {
+    public void processFields(List<CustomFieldDto> oldFields, List<CustomFieldDto> newFields, String collection, CurrentUserContextProvider currentUser) {
 
         if (oldFields == null){
             oldFields = new ArrayList<>();
@@ -94,13 +92,13 @@ public class CustomFieldProcessingService {
         if (oldFields.equals(newFields)) return;
 
         // fields that was deleted from prev
-        List<CustomField> deletedFields = new ArrayList<>();
+        List<CustomFieldDto> deletedFields = new ArrayList<>();
 
         // fields that was changed(type, name, default value etc...)
-        List<CustomField> changedFields = new ArrayList<>();
+        List<CustomFieldDto> changedFields = new ArrayList<>();
 
         // fields that new and was created
-        List<CustomField> newCreatedFields = new ArrayList<>();
+        List<CustomFieldDto> newCreatedFields = new ArrayList<>();
 
         processFieldsNewOldChanged(oldFields, newFields, deletedFields, changedFields, newCreatedFields);
 
@@ -115,11 +113,11 @@ public class CustomFieldProcessingService {
         if (collection.equals(mainDatabaseName)) dataBase = mainDatabaseName;
 
         // DELETE some fields
-        for (CustomField field : deletedFields) {
+        for (CustomFieldDto field : deletedFields) {
             Criteria criteriaDelete = new Criteria();
             criteriaDelete.and("customFields.fieldId").is(field.getFieldId());
 
-            if (dataBase.equals(mainDatabaseName)) processGlobalStoredObjectSecure(criteriaDelete);
+            if (dataBase.equals(mainDatabaseName)) processGlobalStoredObjectSecure(criteriaDelete, currentUser);
 
             Update update = new Update().pull("customFields", new BasicDBObject("fieldId", field.getFieldId()));
             Query query = new Query(criteriaDelete);
@@ -127,10 +125,10 @@ public class CustomFieldProcessingService {
         }
 
         // CREATE new fields
-        for (CustomField field : newCreatedFields) {
+        for (CustomFieldDto field : newCreatedFields) {
             Criteria criteriaCreate = new Criteria();
 
-            if (dataBase.equals(mainDatabaseName)) processGlobalStoredObjectSecure(criteriaCreate);
+            if (dataBase.equals(mainDatabaseName)) processGlobalStoredObjectSecure(criteriaCreate, currentUser);
 
             Update update = new Update().push("customFields", field);
             Query query = new Query(criteriaCreate);
@@ -138,11 +136,11 @@ public class CustomFieldProcessingService {
         }
 
         // UPDATE field
-        for (CustomField field : changedFields) {
+        for (CustomFieldDto field : changedFields) {
             Criteria criteriaUpdate = new Criteria();
             criteriaUpdate.and("customFields.fieldId").is(field.getFieldId());
 
-            if (dataBase.equals(mainDatabaseName)) processGlobalStoredObjectSecure(criteriaUpdate);
+            if (dataBase.equals(mainDatabaseName)) processGlobalStoredObjectSecure(criteriaUpdate, currentUser);
 
             Update update = new Update();
             update.set("customFields.$.name", field.getName());
@@ -165,7 +163,7 @@ public class CustomFieldProcessingService {
         }
     }
 
-    private void processGlobalStoredObjectSecure(Criteria criteria){
+    private void processGlobalStoredObjectSecure(Criteria criteria, CurrentUserContextProvider currentUser){
         criteria.and("domain").is(currentUser.getDomain().getDomain());
     }
 

@@ -7,16 +7,30 @@
 set -e
 # set version of base module
 mvn install -f base/pom.xml org.codehaus.mojo:versions-maven-plugin:2.3:set -DnewVersion=${PROJECT_VERSION}
-#sleep 10;
 
-# set parent version of each module to the lates base module
+BASE_PATH=`pwd`
+
+# hacks to build all
+if [[ $1 == "dev" ]]
+    then
+        mvn clean install -f ../microservice-communicator -DskipTests=true -Dgpg.skip=true
+        mvn clean install -f ../bindings-java/authmicroservicecommunication
+        mvn clean install -f ../bindings-java/auth-context
+fi
+
+# set parent version of each module to the latest base module
 find . -name 'pom.xml' | while read line; do
 
 # do not edit version of base pom
     if [[ $line != "./base/pom.xml" ]]
-    then
-    xmlstarlet ed --inplace -N p=http://maven.apache.org/POM/4.0.0 -u "/p:project/p:parent/p:version" -v ${PROJECT_VERSION} ${line}
-#    mvn -f ${line} org.codehaus.mojo:versions-maven-plugin:2.3:update-parent -DparentVersion=${PROJECT_VERSION} -DallowSnapshots=true -DgenerateBackupPoms=false -U
-        echo "Processing module '$line'"
-    fi
+        then
+            xmlstarlet ed --inplace -N p=http://maven.apache.org/POM/4.0.0 -u "/p:project/p:parent/p:version" -v ${PROJECT_VERSION} ${line}
+            echo "Processing module '$line'"
+        fi
 done
+
+# build all
+if [[ $1 == "dev" ]]
+   then
+       mvn clean install
+fi

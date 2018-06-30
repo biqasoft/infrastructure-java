@@ -21,6 +21,7 @@ public class TestsExecution {
         Assert.assertNotNull(executeJsResponse);
         Assert.assertNotNull(executeJsResponse.getResult());
         Assert.assertEquals(executeJsResponse.getResult(), 83);
+//        Assert.assertEquals(executeJsResponse.getResult(), 83.0);
     }
 
 }

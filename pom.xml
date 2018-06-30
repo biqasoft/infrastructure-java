@@ -4,13 +4,15 @@
   <parent>
     <groupId>com.biqasoft</groupId>
     <artifactId>base</artifactId>
-    <version>2018.3.1</version>
+    <version>2018.7.0</version>
   </parent>
   <artifactId>infrastructure</artifactId>
   <version>${biqa.infrastructure-version}</version>
   <packaging>pom</packaging>
   <modules>
     <module>common</module>
+    <module>entity-core</module>
+    <module>entity</module>
     <module>persistence</module>
     <!--<module>persistence/object-audit</module>-->
     <module>storage</module>

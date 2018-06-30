@@ -6,8 +6,8 @@ package com.biqasoft.audit.object;
 
 import com.biqasoft.audit.object.customfield.CustomObjectUtils;
 import com.biqasoft.audit.object.diffs.ChangeObjectDTO;
+import com.biqasoft.auth.CurrentUserContextProvider;
 import com.biqasoft.entity.core.BaseClass;
-import com.biqasoft.entity.core.CurrentUser;
 import com.biqasoft.entity.core.objects.CustomObjectData;
 import com.biqasoft.microservice.database.MongoTenantHelper;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
@@ -48,14 +48,12 @@ import java.util.stream.Collectors;
 @Service
 public class ObjectsAuditHistoryService {
 
-    private final CurrentUser currentUser;
     private final MongoClient mongoClient;
     private final MongoTenantHelper mongoTenantHelper;
     private List<BaseClassFinder> classFinders;
 
     @Autowired
-    public ObjectsAuditHistoryService(CurrentUser currentUser, MongoClient mongoClient, MongoTenantHelper mongoTenantHelper) {
-        this.currentUser = currentUser;
+    public ObjectsAuditHistoryService(MongoClient mongoClient, MongoTenantHelper mongoTenantHelper) {
         this.mongoClient = mongoClient;
 
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("history-javers-thread-%d").build();
@@ -107,7 +105,7 @@ public class ObjectsAuditHistoryService {
         }
     }
 
-    public Javers getJaversForCurrentUser() {
+    public Javers getJaversForCurrentUser(CurrentUserContextProvider currentUser) {
         return getJavers(currentUser.getDomain().getDomain());
     }
 
@@ -129,8 +127,8 @@ public class ObjectsAuditHistoryService {
         return javers;
     }
 
-    public <T extends BaseClass> void auditChangesForCurrentUser(T t) {
-        auditChanges(currentUser.getDomain().getDomain(), currentUser.getCurrentUser().getId(), t);
+    public <T extends BaseClass> void auditChangesForCurrentUser(T t, CurrentUserContextProvider currentUser) {
+        auditChanges(currentUser.getDomain().getDomain(), currentUser.getUserAccount().getId(), t);
     }
 
     /**
@@ -145,7 +143,7 @@ public class ObjectsAuditHistoryService {
         // do this async because it can create a lot of database request
         executorService.submit(() -> {
             try {
-                // it's safe to all objects including UserAccount with sensitive info
+                // it's safe to all objects including UserAccountDto with sensitive info
                 // if we check requested user domain(which is dbName)
                 T newClass = getBiqaClassById(t, dbName);
 
@@ -178,12 +176,12 @@ public class ObjectsAuditHistoryService {
         });
     }
 
-    public String getChangesStringedLog(List<Change> changes) {
-        return getJaversForCurrentUser().processChangeList(changes, new SimpleTextChangeLog());
+    public String getChangesStringedLog(List<Change> changes, CurrentUserContextProvider currentUser) {
+        return getJaversForCurrentUser(currentUser).processChangeList(changes, new SimpleTextChangeLog());
     }
 
-    public List<Change> getChangesByObject(Class<? extends BaseClass> t, String id) {
-        return getJaversForCurrentUser().findChanges(QueryBuilder.byInstanceId(id, t).build());
+    public List<Change> getChangesByObject(Class<? extends BaseClass> t, String id, CurrentUserContextProvider currentUser) {
+        return getJaversForCurrentUser(currentUser).findChanges(QueryBuilder.byInstanceId(id, t).build());
     }
 
     /**

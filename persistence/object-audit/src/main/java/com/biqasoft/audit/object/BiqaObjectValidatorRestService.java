@@ -5,11 +5,11 @@
 package com.biqasoft.audit.object;
 
 import com.biqasoft.audit.object.customfield.BiqaObjectsCustomFieldProcessorService;
+import com.biqasoft.auth.CurrentUserContextProvider;
 import com.biqasoft.entity.core.BaseClass;
-import com.biqasoft.entity.core.CurrentUser;
+import com.biqasoft.entity.core.CreatedInfo;
 import com.biqasoft.entity.core.GlobalStoredBaseClass;
 import com.biqasoft.entity.core.objects.CustomField;
-import com.biqasoft.entity.core.CreatedInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +21,10 @@ import java.util.Date;
 @Service
 public class BiqaObjectValidatorRestService {
 
-    private final CurrentUser currentUser;
     private final BiqaObjectsCustomFieldProcessorService biqaObjectsCustomFieldProcessorService;
 
     @Autowired
-    public BiqaObjectValidatorRestService(CurrentUser currentUser, BiqaObjectsCustomFieldProcessorService biqaObjectsCustomFieldProcessorService) {
-        this.currentUser = currentUser;
+    public BiqaObjectValidatorRestService(BiqaObjectsCustomFieldProcessorService biqaObjectsCustomFieldProcessorService) {
         this.biqaObjectsCustomFieldProcessorService = biqaObjectsCustomFieldProcessorService;
     }
 
@@ -37,7 +35,7 @@ public class BiqaObjectValidatorRestService {
      * @param <T>
      * @return
      */
-    public <T extends BaseClass> T setDefaultCustomFields(T baseClass) {
+    public <T extends BaseClass> T setDefaultCustomFields(T baseClass, CurrentUserContextProvider currentUser) {
         biqaObjectsCustomFieldProcessorService.setDefaultCustomFields(baseClass, currentUser.getDomain().getDomain());
         return baseClass;
     }
@@ -51,7 +49,7 @@ public class BiqaObjectValidatorRestService {
      * @param <T> processed object
      * @return
      */
-    public <T extends BaseClass> T checkAndSetDefaultBiqa(T biqaClassObject, boolean forceAddCustomField) {
+    public <T extends BaseClass> T checkAndSetDefaultBiqa(T biqaClassObject, boolean forceAddCustomField, CurrentUserContextProvider currentUser) {
         if (biqaClassObject instanceof GlobalStoredBaseClass){
             ((GlobalStoredBaseClass) biqaClassObject).setDomain(currentUser.getDomain().getDomain());
         }
@@ -61,11 +59,11 @@ public class BiqaObjectValidatorRestService {
                 (biqaClassObject.getCreatedInfo() != null &&
                         (biqaClassObject.getCreatedInfo().getCreatedById() == null &&
                                 biqaClassObject.getCreatedInfo().getCreatedDate() == null))) {
-            biqaClassObject.setCreatedInfo(new CreatedInfo(new Date(), currentUser.getCurrentUser().getId()));
+            biqaClassObject.setCreatedInfo(new CreatedInfo(new Date(), currentUser.getUserAccount().getId()));
         }
 
         if (forceAddCustomField) {
-            setDefaultCustomFields(biqaClassObject);
+            setDefaultCustomFields(biqaClassObject, currentUser);
         }
 
         return biqaClassObject;

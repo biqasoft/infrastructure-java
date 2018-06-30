@@ -4,7 +4,7 @@
 //
 //package com.biqasoft.microservice.i18n;
 //
-//import com.biqasoft.entity.core.useraccount.UserAccount;
+//import com.biqasoft.users.domain.useraccount.UserAccountDto;
 //import com.biqasoft.entity.core.CurrentUser;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@
 //    private CurrentUser currentUser;
 //
 //    /**
-//     * Get locale by user specific language {@link UserAccount#getLanguage()}
+//     * Get locale by user specific language {@link UserAccountDto#getLanguage()}
 //     *
 //     * @param httpServletRequest
 //     * @return

@@ -5,7 +5,6 @@
 package com.biqasoft.audit.object;
 
 import com.biqasoft.entity.core.BaseClass;
-import com.biqasoft.entity.core.DomainSettings;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -60,7 +59,7 @@ public class BiqaClassService {
     }
 
     /**
-     * Name used when we need unique names for BaseClass object as string,
+     * Name used when we need unique names for BaseClassDto object as string,
      * for example key in map {@link DomainSettings#getDefaultCustomFields()}
      * @param aClass
      * @return

@@ -5,6 +5,7 @@
 package com.biqasoft.audit.object.aspect;
 
 import com.biqasoft.audit.object.ObjectsAuditHistoryService;
+import com.biqasoft.auth.CurrentUserContextProvider;
 import com.biqasoft.entity.core.BaseClass;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -15,13 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 /**
  * Aspects
  */
 @Aspect
 @Component
 @Configuration
-public class AuditObjectAspect {
+public class AuditObjectAspect extends BaseAspect {
 
     @Autowired
     private ObjectsAuditHistoryService objectsAuditHistoryService;
@@ -41,8 +44,15 @@ public class AuditObjectAspect {
         Object[] params = joinPoint.getArgs();
         for (Object o : params) {
             if (o instanceof BaseClass) {
-                BaseClass baseClass = (BaseClass) o;
-                objectsAuditHistoryService.auditChangesForCurrentUser(baseClass);
+
+                Optional<CurrentUserContextProvider> first = getAuthContextFromParams(params);
+                if (first.isPresent()) {
+                    BaseClass baseClass = (BaseClass) o;
+                    objectsAuditHistoryService.auditChangesForCurrentUser(baseClass, first.get());
+                }else {
+                    throw new IllegalStateException("biqaAuditObject with not existed CurrentUserContextProvider param");
+                }
+
             }
         }
 

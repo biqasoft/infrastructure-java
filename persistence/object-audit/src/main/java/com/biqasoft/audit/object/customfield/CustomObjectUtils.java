@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
  */
 public class CustomObjectUtils {
     // every type of custom object have `collectionId`
-    // this is ID of custom object template object (`CustomObject` collection)
+    // this is ID of custom object template object (`CustomObjectDto` collection)
     // and every type of objects is stored in separate collection in database
     public static final String CUSTOM_OBJECT_COLLECTION_PREFIX = "co_";
 

@@ -5,6 +5,7 @@
 package com.biqasoft.audit.object.aspect;
 
 import com.biqasoft.audit.object.BiqaObjectValidatorRestService;
+import com.biqasoft.auth.CurrentUserContextProvider;
 import com.biqasoft.entity.annotations.BiqaAddObject;
 import com.biqasoft.entity.core.BaseClass;
 import org.aspectj.lang.JoinPoint;
@@ -17,13 +18,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 /**
  * Aspects
  */
 @Aspect
 @Component
 @Configuration
-public class AuditObjectCreateAspect {
+public class AuditObjectCreateAspect extends BaseAspect  {
 
     @Autowired
     private BiqaObjectValidatorRestService biqaObjectValidatorRestService;
@@ -43,13 +46,19 @@ public class AuditObjectCreateAspect {
         for (Object o : params) {
             if (o instanceof BaseClass) {
 
-                MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-                BiqaAddObject annotation = methodSignature.getMethod().getAnnotation(BiqaAddObject.class);
-                if (annotation == null) {
-                    logger.error("Hm... why we are here");
+                Optional<CurrentUserContextProvider> first = getAuthContextFromParams(params);
+                if (first.isPresent()) {
+                    MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+                    BiqaAddObject annotation = methodSignature.getMethod().getAnnotation(BiqaAddObject.class);
+                    if (annotation == null) {
+                        logger.error("Hm... why we are here");
+                    } else {
+                        biqaObjectValidatorRestService.checkAndSetDefaultBiqa((BaseClass) o, annotation.forceAddCustomField(), first.get());
+                    }
                 } else {
-                    biqaObjectValidatorRestService.checkAndSetDefaultBiqa((BaseClass) o, annotation.forceAddCustomField());
+                    throw new IllegalStateException("beforeSaveAspect with not existed CurrentUserContextProvider param");
                 }
+
 
             }
         }

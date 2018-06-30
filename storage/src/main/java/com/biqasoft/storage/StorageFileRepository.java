@@ -4,12 +4,12 @@
 
 package com.biqasoft.storage;
 
-import com.biqasoft.entity.constants.TOKEN_TYPES;
+import com.biqasoft.auth.core.Domain;
+import com.biqasoft.auth.core.UserAccount;
 import com.biqasoft.common.exceptions.InvalidStateException;
-import com.biqasoft.entity.core.Domain;
-import com.biqasoft.storage.entity.StorageFile;
+import com.biqasoft.entity.constants.TOKEN_TYPES;
 import com.biqasoft.entity.system.ExternalServiceToken;
-import com.biqasoft.entity.core.useraccount.UserAccount;
+import com.biqasoft.storage.entity.StorageFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

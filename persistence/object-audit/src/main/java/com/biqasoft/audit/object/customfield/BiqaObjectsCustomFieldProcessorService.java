@@ -5,11 +5,14 @@
 package com.biqasoft.audit.object.customfield;
 
 import com.biqasoft.audit.object.BiqaClassService;
+import com.biqasoft.auth.CurrentUserContextProvider;
 import com.biqasoft.common.exceptions.InvalidStateException;
 import com.biqasoft.entity.core.BaseClass;
-import com.biqasoft.entity.core.DomainSettings;
 import com.biqasoft.entity.core.objects.CustomField;
 import com.biqasoft.microservice.common.MicroserviceDomainSettings;
+import com.biqasoft.microservice.common.dto.DomainSettingsDto;
+import com.biqasoft.microservice.common.dto.core.objects.CustomFieldDto;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +26,12 @@ import java.util.Map;
 public class BiqaObjectsCustomFieldProcessorService {
 
     private final CustomFieldProcessingService customFieldProcessingRepository;
-    private final MicroserviceDomainSettings microserviceDomainSettings;
+    private final MicroserviceDomainSettings microserviceDomainSettingsDto;
     private final BiqaClassService biqaClassService;
 
     @Autowired
-    public BiqaObjectsCustomFieldProcessorService(MicroserviceDomainSettings microserviceDomainSettings, CustomFieldProcessingService customFieldProcessingRepository, BiqaClassService biqaClassService) {
-        this.microserviceDomainSettings = microserviceDomainSettings;
+    public BiqaObjectsCustomFieldProcessorService(MicroserviceDomainSettings microserviceDomainSettingsDto, CustomFieldProcessingService customFieldProcessingRepository, BiqaClassService biqaClassService) {
+        this.microserviceDomainSettingsDto = microserviceDomainSettingsDto;
         this.customFieldProcessingRepository = customFieldProcessingRepository;
         this.biqaClassService = biqaClassService;
     }
@@ -36,24 +39,24 @@ public class BiqaObjectsCustomFieldProcessorService {
     /**
      * Update {@link CustomField} for {@link BaseClass} objects
      *
-     * @param domainSettings new domainSettings
+     * @param DomainSettingsDto new DomainSettingsDto
      * @return
      */
-    public DomainSettings parseCustomFields(DomainSettings domainSettings) {
-        DomainSettings oldDomainSettings = microserviceDomainSettings.findDomainSetting();
+    public DomainSettingsDto parseCustomFields(DomainSettingsDto DomainSettingsDto, CurrentUserContextProvider currentUserContextProvider) {
+        DomainSettingsDto oldDomainSettingsDto = microserviceDomainSettingsDto.findDomainSetting();
 
-        if (oldDomainSettings.equals(domainSettings)) return domainSettings;
+        if (oldDomainSettingsDto.equals(DomainSettingsDto)) return DomainSettingsDto;
 
         Map<String, Class<? extends BaseClass>> classesExtendsBiqaAbstract = biqaClassService.getBiqaClasses();
 
         for (Map.Entry<String, Class<? extends BaseClass>> entry : classesExtendsBiqaAbstract.entrySet()) {
             String key = entry.getKey();
-            customFieldProcessingRepository.processFields(oldDomainSettings.getDefaultCustomFields().get(key),
-                                                          domainSettings.getDefaultCustomFields().get(key),
-                                                          key);
+            customFieldProcessingRepository.processFields(oldDomainSettingsDto.getDefaultCustomFields().get(key),
+                    DomainSettingsDto.getDefaultCustomFields().get(key),
+                    key, currentUserContextProvider);
         }
 
-        return domainSettings;
+        return DomainSettingsDto;
     }
 
     /**
@@ -66,12 +69,13 @@ public class BiqaObjectsCustomFieldProcessorService {
      * @return
      */
     public <T extends BaseClass> T setDefaultCustomFields(T baseClass, String domain) {
-        DomainSettings domainSettings = microserviceDomainSettings.unsafeFindDomainSettingsById(domain);
-        if (domainSettings == null) throw new InvalidStateException("ERROR DOMAIN GET");
+        DomainSettingsDto DomainSettingsDto = microserviceDomainSettingsDto.unsafeFindDomainSettingsById(domain);
+        if (DomainSettingsDto == null) throw new InvalidStateException("ERROR DOMAIN GET");
 
-        List<CustomField> customFields = domainSettings.getCustomFieldForClass(biqaClassService.getName(baseClass.getClass()));
+        List<CustomFieldDto> customFields = DomainSettingsDto.getCustomFieldForClass(biqaClassService.getName(baseClass.getClass()));
 
-        baseClass.setCustomFields(customFields);
+        baseClass.setCustomFields(com.biqasoft.common.utils.ObjectUtils.clone(customFields, new TypeReference<List<CustomField>>() {
+        }));
         return baseClass;
     }
 
