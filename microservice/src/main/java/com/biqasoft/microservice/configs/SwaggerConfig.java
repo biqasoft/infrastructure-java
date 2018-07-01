@@ -13,9 +13,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * incompatible with web flux https://github.com/springfox/springfox/issues/1773
  * Create Swagger for all microservices including internal
  */
+// TODO: wait web flux support https://github.com/springfox/springfox/issues/1773
 @ConditionalOnClass(name = "javax/servlet/ServletContext")
 @Configuration
 @EnableSwagger2

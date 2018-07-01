@@ -89,10 +89,9 @@ public class MongoConfiguration {
      * This is a client, not connection to some database
      *
      * @return
-     * @throws Exception
      */
     @Bean
-    MongoClient mongoClient() throws Exception {
+    MongoClient mongoClient() {
         MongoClient mongoClient;
         List<ServerAddress> serverAddresses = new ArrayList<>();
 

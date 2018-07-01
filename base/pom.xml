@@ -5,7 +5,7 @@
 
     <groupId>com.biqasoft</groupId>
     <artifactId>base</artifactId>
-    <version>2018.7.0</version>
+    <version>2018.7.0-SNAPSHOT</version>
 
     <name>com.biqasoft.base</name>
     <packaging>pom</packaging>
@@ -17,7 +17,7 @@
     </parent>
 
     <properties>
-        <biqa.infrastructure-version>2.0-RELEASE</biqa.infrastructure-version>
+        <biqa.infrastructure-version>2.0-SNAPSHOT</biqa.infrastructure-version>
         <biqa.binding-version>${biqa.infrastructure-version}</biqa.binding-version>
 
         <!-- Make platform independent -->
@@ -33,7 +33,7 @@
         <testng.version>6.9.10</testng.version>
 
         <commons-lang3.version>3.4</commons-lang3.version>
-        <springfox.version>2.8.0</springfox.version>
+        <springfox.version>2.9.2</springfox.version>
 
         <!-- Maven plugins -->
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
@@ -59,6 +59,8 @@
         <microservice-communicator.version>2.0.0-RELEASE</microservice-communicator.version>
         <spring-cloud-consul-dependencies.version>2.0.0.RELEASE</spring-cloud-consul-dependencies.version>
 
+        <!--<mongo-data.version>2.1.0.M3</mongo-data.version>-->
+
         <!--override base import https://github.com/Ecwid/consul-api/issues/143-->
         <consul-api.version>1.4.0</consul-api.version>
     </properties>
@@ -77,6 +79,49 @@
                 <groupId>com.ecwid.consul</groupId>
                 <artifactId>consul-api</artifactId>
                 <version>${consul-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-releasetrain</artifactId>
+                <version>Lovelace-M3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.data</groupId>-->
+                <!--<artifactId>spring-data-mongodb</artifactId>-->
+                <!--<version>${mongo-data.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.data</groupId>-->
+                <!--<artifactId>spring-data-commons</artifactId>-->
+                <!--<version>${mongo-data.version}</version>-->
+            <!--</dependency>-->
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>3.8.0-beta2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver</artifactId>
+                <version>3.8.0-beta2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-core</artifactId>
+                <version>3.8.0-beta2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-async</artifactId>
+                <version>3.8.0-beta2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-reactivestreams</artifactId>
+                <version>1.9.0-beta1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -97,47 +142,68 @@
         </repository>
     </distributionManagement>
 
-    <!--<profiles>-->
-    <!--<profile>-->
-    <!--<repositories>-->
-    <!--<repository>-->
-    <!--<snapshots>-->
-    <!--<enabled>false</enabled>-->
-    <!--</snapshots>-->
-    <!--<id>central</id>-->
-    <!--<name>libs-release</name>-->
-    <!--<url>http://192.168.127.131:8081/artifactory/libs-release</url>-->
-    <!--</repository>-->
-    <!--<repository>-->
-    <!--<snapshots/>-->
-    <!--<id>snapshots</id>-->
-    <!--<name>libs-snapshot</name>-->
-    <!--<url>http://192.168.127.131:8081/artifactory/libs-snapshot</url>-->
-    <!--</repository>-->
-    <!--</repositories>-->
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>jdk10</id>
+            <properties>
+                <jdk.version>1.10</jdk.version>
+            </properties>
 
-    <!--<pluginRepositories>-->
-    <!--<pluginRepository>-->
-    <!--<snapshots>-->
-    <!--<enabled>false</enabled>-->
-    <!--</snapshots>-->
-    <!--<id>central</id>-->
-    <!--<name>plugins-release</name>-->
-    <!--<url>hhttp://192.168.127.131:8081/artifactory/plugins-release</url>-->
-    <!--</pluginRepository>-->
-    <!--<pluginRepository>-->
-    <!--<snapshots/>-->
-    <!--<id>snapshots</id>-->
-    <!--<name>plugins-snapshot</name>-->
-    <!--<url>http://192.168.127.131:8081/artifactory/plugins-snapshot</url>-->
-    <!--</pluginRepository>-->
-    <!--</pluginRepositories>-->
-    <!--<id>artifactory</id>-->
-    <!--<activation>-->
-    <!--<activeByDefault>true</activeByDefault>-->
-    <!--</activation>-->
-    <!--</profile>-->
-    <!--</profiles>-->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${maven-surefire-plugin.version}</version>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+
+        <profile>
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>central</id>
+                    <name>libs-release</name>
+                    <url>https://artifactory.corp.nbakaev.com/artifactory/libs-release</url>
+                </repository>
+                <repository>
+                    <snapshots/>
+                    <id>snapshots</id>
+                    <name>libs-snapshot</name>
+                    <url>https://artifactory.corp.nbakaev.com/artifactory/libs-snapshot</url>
+                </repository>
+            </repositories>
+
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>central</id>
+                    <name>plugins-release</name>
+                    <url>https://artifactory.corp.nbakaev.com/artifactory/plugins-release</url>
+                </pluginRepository>
+                <pluginRepository>
+                    <snapshots/>
+                    <id>snapshots</id>
+                    <name>plugins-snapshot</name>
+                    <url>https://artifactory.corp.nbakaev.com/artifactory/plugins-snapshot</url>
+                </pluginRepository>
+            </pluginRepositories>
+            <id>artifactory</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 
     <dependencies>
 
@@ -315,82 +381,6 @@
         </dependency>
 
     </dependencies>
-
-    <profiles>
-        <profile>
-            <repositories>
-                <repository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <id>bintray-maven</id>
-                    <name>bintray</name>
-                    <url>https://dl.bintray.com/jaycroaker/maven</url>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <id>bintray-maven</id>
-                    <name>bintray-plugins</name>
-                    <url>https://dl.bintray.com/jaycroaker/maven</url>
-                </pluginRepository>
-            </pluginRepositories>
-            <id>bintray</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-
-        <!--<profile>-->
-            <!--<id>jdk9</id>-->
-            <!--<properties>-->
-                <!--<jdk.version>1.9</jdk.version>-->
-            <!--</properties>-->
-
-            <!--<build>-->
-                <!--<plugins>-->
-                    <!--<plugin>-->
-                        <!--<groupId>org.apache.maven.plugins</groupId>-->
-                        <!--<artifactId>maven-surefire-plugin</artifactId>-->
-                        <!--<version>${maven-surefire-plugin.version}</version>-->
-                        <!--<configuration>-->
-                            <!--<systemPropertyVariables>-->
-                                <!--<java.version>10</java.version>-->
-                            <!--</systemPropertyVariables>-->
-                            <!--<argLine>-->
-                                <!--&#45;&#45;add-modules=java.xml.bind -->
-                            <!--</argLine>-->
-                        <!--</configuration>-->
-                    <!--</plugin>-->
-                <!--</plugins>-->
-            <!--</build>-->
-
-        <!--</profile>-->
-
-        <profile>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <id>jdk10</id>
-            <properties>
-                <jdk.version>1.10</jdk.version>
-            </properties>
-
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${maven-surefire-plugin.version}</version>
-                    </plugin>
-                </plugins>
-            </build>
-
-        </profile>
-    </profiles>
 
     <build>
         <finalName>artifact.biqasoft.com</finalName>

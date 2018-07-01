@@ -38,7 +38,7 @@ public class MongoHelpers {
                 )
         ));
         converter.afterPropertiesSet();
-        return new MongoTemplate (mongoDbFactory, converter);
+        return new MongoTemplate(mongoDbFactory, converter);
     }
 
     public static ReactiveMongoTemplate MongoReactiveConverter(ReactiveMongoDatabaseFactory mongoDbFactory) {
