@@ -14,7 +14,7 @@ import org.javers.core.metamodel.annotation.Value;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Value
@@ -22,7 +22,7 @@ import java.util.Date;
 public class CreatedInfo implements Serializable {
 
     @Indexed
-    private Date createdDate;
+    private LocalDateTime createdDate;
     @Indexed
     private String createdById;
 
@@ -30,12 +30,12 @@ public class CreatedInfo implements Serializable {
     }
 
 
-    public CreatedInfo(Date createdDate, String createdById) {
+    public CreatedInfo(LocalDateTime createdDate, String createdById) {
         this.createdDate = createdDate;
         this.createdById = createdById;
     }
 
-    public CreatedInfo(Date createdDate) {
+    public CreatedInfo(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 

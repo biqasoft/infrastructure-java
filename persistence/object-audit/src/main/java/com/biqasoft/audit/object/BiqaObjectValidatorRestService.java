@@ -13,7 +13,7 @@ import com.biqasoft.entity.core.objects.CustomField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Validate and set default fields for {@link BaseClass}
@@ -59,7 +59,7 @@ public class BiqaObjectValidatorRestService {
                 (biqaClassObject.getCreatedInfo() != null &&
                         (biqaClassObject.getCreatedInfo().getCreatedById() == null &&
                                 biqaClassObject.getCreatedInfo().getCreatedDate() == null))) {
-            biqaClassObject.setCreatedInfo(new CreatedInfo(new Date(), currentUser.getUserAccount().getId()));
+            biqaClassObject.setCreatedInfo(new CreatedInfo(LocalDateTime.now(), currentUser.getUserAccount().getId()));
         }
 
         if (forceAddCustomField) {

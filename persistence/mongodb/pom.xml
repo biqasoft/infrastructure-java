@@ -10,31 +10,29 @@
   <artifactId>mongodb</artifactId>
   <name>com.biqasoft.mongodb</name>
   <dependencies>
-      <dependency>
-          <groupId>org.mongodb</groupId>
-          <artifactId>mongodb-driver</artifactId>
-          <!--<version>RELEASE</version>-->
-      </dependency>
-      <dependency>
-          <groupId>org.mongodb</groupId>
-          <artifactId>mongodb-driver-core</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.mongodb</groupId>
-          <artifactId>mongodb-driver-async</artifactId>
-          <version>3.8.0-beta2</version>
-      </dependency>
-      <dependency>
-          <groupId>org.mongodb</groupId>
-          <artifactId>mongodb-driver-reactivestreams</artifactId>
-          <version>1.9.0-beta1</version>
-      </dependency>
-
-      <!--<dependency>-->
-          <!--<groupId>org.springframework.boot</groupId>-->
-          <!--<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>-->
-          <!--&lt;!&ndash;<version>2.0.3.RELEASE</version>&ndash;&gt;-->
-      <!--</dependency>-->
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver-async</artifactId>
+      <version>3.8.0-beta2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver-reactivestreams</artifactId>
+      <version>1.9.0-beta1</version>
+    </dependency>
+    <!--<dependency>-->
+    <!--<groupId>org.springframework.boot</groupId>-->
+    <!--<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>-->
+    <!--&lt;!&ndash;<version>2.0.3.RELEASE</version>&ndash;&gt;-->
+    <!--</dependency>-->
     <dependency>
       <groupId>com.biqasoft</groupId>
       <artifactId>mongodb-core</artifactId>
