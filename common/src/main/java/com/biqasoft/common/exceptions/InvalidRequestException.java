@@ -12,15 +12,12 @@ package com.biqasoft.common.exceptions;
 @SuppressWarnings("serial")
 public class InvalidRequestException extends RuntimeException {
 
-    public InvalidRequestException() {
-    }
-
     public InvalidRequestException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 
     public InvalidRequestException(String message) {
-        super(message);
+        super(message, null, false, false);
     }
 
 }

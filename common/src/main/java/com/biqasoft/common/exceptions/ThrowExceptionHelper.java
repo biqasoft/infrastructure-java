@@ -16,8 +16,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ThrowExceptionHelper {
 
-    private final static Logger logger = LoggerFactory.getLogger(ThrowExceptionHelper.class);
-
     public static void throwExceptionInvalidRequest(String message) throws InvalidRequestException {
         throw new InvalidRequestException(message, null, false, false);
     }
@@ -28,6 +26,6 @@ public class ThrowExceptionHelper {
      * @param messageId id of i18n property in resource folder
      */
     public static void throwExceptionInvalidRequestLocalized(String messageId) throws InvalidRequestException {
-        throw new InvalidRequestLocalizedException(messageId);
+        throw new InvalidRequestLocalizedException(messageId, null, false, false);
     }
 }

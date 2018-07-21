@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 
@@ -23,6 +24,7 @@ import java.util.Date;
 import java.util.Map;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @ApiModel("Storage File ( jpg, zip, doc, excel etc ). " +
         " This is meta information, such as size, where it is located etc")
 @JsonInclude(JsonInclude.Include.NON_NULL)

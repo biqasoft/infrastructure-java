@@ -13,22 +13,21 @@ import lombok.Data;
 import org.javers.core.metamodel.annotation.Value;
 import org.springframework.data.mongodb.core.index.Indexed;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @Value
 @ApiModel(description = "Information about creating this object. Who and when created it")
-public class CreatedInfo implements Serializable {
+public class CreatedInfo {
 
     @Indexed
     private LocalDateTime createdDate;
+
     @Indexed
     private String createdById;
 
     public CreatedInfo() {
     }
-
 
     public CreatedInfo(LocalDateTime createdDate, String createdById) {
         this.createdDate = createdDate;
